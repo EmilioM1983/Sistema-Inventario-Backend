@@ -8,5 +8,8 @@ import org.springframework.http.ResponseEntity;
  * @author emaye
  */
 public interface ICategoryServices {
+    
     public ResponseEntity<CategoryResponseRest> search();
+    
+    public ResponseEntity<CategoryResponseRest> searchById(Long id);
 }
