@@ -28,4 +28,12 @@ public interface ICategoryServices {
      * @return 
      */
     public ResponseEntity<CategoryResponseRest> saveCategoriy(Category category);
+    
+    /**
+     * Update category by id
+     * @param category
+     * @param id
+     * @return 
+     */
+    public ResponseEntity<CategoryResponseRest> updateCategoriy(Category category, Long id);
 }
