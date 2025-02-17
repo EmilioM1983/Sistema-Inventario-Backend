@@ -121,9 +121,10 @@ public class CategoryServiceImpl implements ICategoryServices {
 
     /**
      * Update category by id
+     *
      * @param category
      * @param id
-     * @return 
+     * @return
      */
     @Override
     @Transactional
@@ -160,6 +161,37 @@ public class CategoryServiceImpl implements ICategoryServices {
 
         } catch (Exception e) {
             response.setMetadata("Respuesta no ok", "-1", "Error al actualizar categoria");
+            e.getStackTrace();
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Delete category by id
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseEntity<CategoryResponseRest> deleteById(Long id) {
+        CategoryResponseRest response = new CategoryResponseRest();
+        Optional<Category> categoryToDelete = categoryDao.findById(id);
+        List<Category> listCategory = new ArrayList<>();
+
+        try {
+
+            if (categoryToDelete.isPresent()) {
+                listCategory.add(categoryToDelete.get());
+                response.getCategoryResponse().setCategory(listCategory);
+                categoryDao.deleteById(id);
+
+                //Arma la metadata
+                response.setMetadata("Respuesta ok", "00", "Categoria eliminada exitosamente");
+            }
+
+        } catch (Exception e) {
+            response.setMetadata("Respuesta no ok", "-1", "Error al eliminar categoria");
             e.getStackTrace();
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

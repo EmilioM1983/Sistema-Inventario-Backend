@@ -5,6 +5,7 @@ import com.ehmsoft.SistemaInventario.response.CategoryResponseRest;
 import com.ehmsoft.SistemaInventario.services.ICategoryServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,7 @@ public class CategoryRestController {
      * @param category
      * @return 
      */
-    @PostMapping("/categories/save")
+    @PostMapping("/categories")
     public ResponseEntity<CategoryResponseRest> saveCategory(@RequestBody Category category){
         return service.saveCategoriy(category);
     }
@@ -64,5 +65,16 @@ public class CategoryRestController {
     @PutMapping("/categories/{id}")
     public ResponseEntity<CategoryResponseRest> updateCategory(@RequestBody Category category, @PathVariable Long id){
         return service.updateCategoriy(category, id);
+    }
+    
+    /**
+     * Delete category by id
+     * @param id
+     * @return 
+     */
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<CategoryResponseRest> deleteCategoriesById(@PathVariable Long id){
+        
+        return service.deleteById(id);
     }
 }

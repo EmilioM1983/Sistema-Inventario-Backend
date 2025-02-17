@@ -36,4 +36,11 @@ public interface ICategoryServices {
      * @return 
      */
     public ResponseEntity<CategoryResponseRest> updateCategoriy(Category category, Long id);
+    
+    /**
+     * Delete category by id 
+     * @param id
+     * @return 
+     */
+    public ResponseEntity<CategoryResponseRest> deleteById(Long id);
 }
